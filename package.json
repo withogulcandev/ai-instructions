@@ -1,9 +1,8 @@
 {
   "name": "ai-instructions",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "AI development instruction library.",
   "main": "index.js",
-  "type": "module",
   "bin": {
     "ai-instructions": "./index.js"
   },
