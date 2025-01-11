@@ -1,10 +1,11 @@
 {
   "name": "ai-instructions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI development instruction library.",
-  "main": "index.js",
+  "main": "./bin/init.js",
+  "type": "module",
   "bin": {
-    "ai-instructions": "./index.js"
+    "ai-instructions": "./bin/init.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
