@@ -1,0 +1,22 @@
+{
+  "name": "ai-instructions",
+  "version": "0.1.0",
+  "description": "AI development instruction library.",
+  "main": "index.js",
+  "bin": {
+    "ai-instructions": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withogulcandev/ai-instructions.git"
+  },
+  "author": "withogulcandev <hi@ogulcan.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/withogulcandev/ai-instructions/issues"
+  },
+  "homepage": "https://github.com/withogulcandev/ai-instructions#readme"
+}
