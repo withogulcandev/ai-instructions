@@ -1,0 +1,59 @@
+{
+  "name": "Next.js SaaS Starter",
+  "version": "1.0.0",
+  "description": "Simple SaaS starter with Next.js, Supabase Auth, and Stripe payments. Includes landing page and basic dashboard.",
+  "author": "withogulcandev",
+  "tags": ["nextjs", "saas", "supabase", "stripe", "typescript", "tailwind"],
+  "dependencies": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "variables": {
+    "projectName": {
+      "type": "string",
+      "description": "Name of your SaaS project",
+      "default": "my-saas-app"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of your SaaS project",
+      "default": "Simple SaaS application with authentication and payments"
+    },
+    "author": {
+      "type": "string",
+      "description": "Project author or company name",
+      "default": ""
+    }
+  },
+  "configuration": {
+    "features": {
+      "auth": {
+        "provider": "supabase",
+        "methods": ["email", "google", "github"]
+      },
+      "payment": {
+        "provider": "stripe",
+        "features": ["subscriptions", "one-time-payments"]
+      }
+    },
+    "pages": {
+      "public": ["landing", "pricing", "login", "register"],
+      "protected": ["dashboard"]
+    }
+  },
+  "postInstall": [
+    "1. Copy .env.example to .env",
+    "2. Create a Supabase project and add credentials to .env",
+    "3. Set up Stripe account and add API keys to .env",
+    "4. Run 'npm install' to install dependencies",
+    "5. Run 'npm run dev' to start development"
+  ],
+  "scripts": {
+    "setup": "npm install && npm run env:copy",
+    "env:copy": "cp .env.example .env",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
+} 
