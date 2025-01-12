@@ -12,7 +12,7 @@ Simple setup guide for the Empty Next.js project template.
 ### 1. Project Creation
 ```bash
 # Using create-next-app
-npx create-next-app@latest . --typescript --tailwind --app --src-dir --import-alias "@/*"
+npx create-next-app@latest project --typescript --tailwind --app --src-dir --import-alias "@/*"
 
 # Add Shadcn UI
 npx shadcn@latest init

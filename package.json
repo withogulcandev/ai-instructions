@@ -1,6 +1,6 @@
 {
   "name": "ai-instructions",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A powerful CLI tool for generating project templates and development instructions using AI-driven approach.",
   "main": "./src/index.js",
   "type": "module",
