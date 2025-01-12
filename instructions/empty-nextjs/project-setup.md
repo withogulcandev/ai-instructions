@@ -1,34 +1,32 @@
 # Project Setup Instructions
 
-This document outlines the step-by-step process for setting up the Empty Next.js project template.
+Simple setup guide for the Empty Next.js project template.
+
+## Quick Start
+```bash
+npx ai-instructions init --template "empty-nextjs"
+```
 
 ## Prerequisites
 - Node.js 18.17 or later
 - Git
 - Package manager (npm, yarn, or pnpm)
 
-## Initial Setup
+## Setup Steps
 
 ### 1. Project Creation
 ```bash
 # Using create-next-app
-npx create-next-app@latest my-app --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+npx create-next-app@latest my-app --typescript --tailwind --app --src-dir --import-alias "@/*"
 
 # Navigate to project directory
 cd my-app
+
+# Add Shadcn UI
+npx shadcn-ui@latest init
 ```
 
-### 2. Additional Dependencies
-
-```bash
-# Development dependencies
-npm install -D prettier prettier-plugin-tailwindcss @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom husky lint-staged
-
-# UI and functionality
-npm install @radix-ui/react-slot class-variance-authority clsx tailwind-merge lucide-react
-```
-
-### 3. Configuration Files
+### 2. Essential Configuration Files
 
 #### TypeScript Configuration (`tsconfig.json`)
 ```json
@@ -61,32 +59,41 @@ npm install @radix-ui/react-slot class-variance-authority clsx tailwind-merge lu
 }
 ```
 
-#### ESLint Configuration (`.eslintrc.json`)
-```json
-{
-  "extends": [
-    "next/core-web-vitals",
-    "prettier"
-  ],
-  "rules": {
-    "no-unused-vars": "warn",
-    "no-console": "warn"
-  }
+### 3. Initial Page Setup
+The template includes a basic hero section in `src/app/page.tsx`:
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export default function Home() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-zinc-900 to-black">
+      <div className="container px-4 py-16 text-center">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+          Empty Next.js Template
+        </h1>
+        <p className="mb-8 text-lg text-zinc-300">
+          Get started by running:
+        </p>
+        <div className="flex justify-center">
+          <code className="relative rounded bg-zinc-800 px-[0.5rem] py-[0.3rem] font-mono text-sm text-zinc-100">
+            npx ai-instructions init --template "empty-nextjs"
+          </code>
+        </div>
+        <div className="mt-8">
+          <a href="https://github.com/withogulcandev/ai-instructions" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="text-white">
+              GitHub
+            </Button>
+          </a>
+        </div>
+      </div>
+    </div>
+  )
 }
 ```
 
-#### Prettier Configuration (`.prettierrc`)
-```json
-{
-  "semi": false,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "plugins": ["prettier-plugin-tailwindcss"]
-}
-```
-
-### 4. Git Setup
+### 4. Basic Git Setup
 
 ```bash
 # Initialize Git repository (if not already done)
@@ -94,77 +101,35 @@ git init
 
 # Create .gitignore
 cat > .gitignore << EOL
-# dependencies
 /node_modules
 /.pnp
 .pnp.js
-
-# testing
 /coverage
-
-# next.js
 /.next/
 /out/
-
-# production
 /build
-
-# misc
 .DS_Store
 *.pem
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# local env files
 .env*.local
-
-# vercel
 .vercel
-
-# typescript
 *.tsbuildinfo
 next-env.d.ts
 EOL
 ```
 
-### 5. Husky Setup
-
-```bash
-# Initialize Husky
-npx husky-init && npm install
-
-# Add lint-staged configuration to package.json
-{
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  }
-}
-```
-
-## Post-Setup Verification
+## Verification
 
 1. Start the development server:
 ```bash
 npm run dev
 ```
 
-2. Verify the following:
+2. Check that:
    - Application runs without errors
-   - TypeScript compilation succeeds
-   - ESLint shows no errors
-   - Prettier formatting works
-   - Git hooks are working
-
-## Next Steps
-
-After completing the setup:
-1. Review the project structure documentation
-2. Set up your development environment
-3. Configure your IDE settings
-4. Review the development guidelines 
+   - TypeScript compilation works
+   - Shadcn UI components are working
+   - Hero section displays correctly
+``` 
