@@ -10,7 +10,6 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import ora from 'ora';
 import { glob } from 'glob';
-import handlebars from 'handlebars';
 
 // Constants
 const __filename = fileURLToPath(import.meta.url);
@@ -22,31 +21,6 @@ async function getTemplates() {
   const templates = await glob('*', { cwd: templatesDir });
   if (!templates.length) throw new Error('No templates found.');
   return templates;
-}
-
-function loadConfig(templatePath) {
-  const configPath = path.join(templatePath, 'template.json');
-  try {
-    return fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : null;
-  } catch (error) {
-    throw new Error(`Invalid template configuration: ${error.message}`);
-  }
-}
-
-// UI/Display Functions
-function showTemplateInfo(config) {
-  if (!config) return;
-  console.log(chalk.cyan('\nTemplate Information:'));
-  ['name', 'version', 'description'].forEach(key => 
-    console.log(chalk.white(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${config[key]}`))
-  );
-  if (config.tags?.length) console.log(chalk.white(`Tags: ${config.tags.join(', ')}`));
-  if (config.dependencies) {
-    console.log(chalk.yellow('\nRequirements:'));
-    Object.entries(config.dependencies).forEach(([key, value]) => 
-      console.log(chalk.white(`${key}: ${value}`))
-    );
-  }
 }
 
 // User Input/Interaction
@@ -67,90 +41,53 @@ async function selectTemplate(templates) {
   return template;
 }
 
-async function customizeTemplate(config) {
-  const { customize } = await inquirer.prompt([{
-    type: 'confirm',
-    name: 'customize',
-    message: 'Customize the template?',
-    default: false
-  }]);
-
-  if (!customize) return {};
-
-  const questions = config?.variables 
-    ? Object.entries(config.variables).map(([key, value]) => ({
-        type: 'input',
-        name: key,
-        message: value.description || `Enter ${key}:`,
-        default: value.default || ''
-      }))
-    : [
-        {
-          type: 'input',
-          name: 'projectName',
-          message: 'Project name:',
-          default: path.basename(process.cwd())
-        },
-        {
-          type: 'input',
-          name: 'description',
-          message: 'Project description:',
-          default: ''
-        },
-        {
-          type: 'input',
-          name: 'author',
-          message: 'Author name:',
-          default: ''
-        }
-      ];
-
-  return inquirer.prompt(questions);
-}
-
 // File Operations
-async function copyFiles(src, dest, variables, spinner) {
+async function copyFiles(src, dest, spinner) {
   if (!fs.existsSync(src)) throw new Error(`Source not found: ${src}`);
   fs.mkdirSync(dest, { recursive: true });
 
   const entries = fs.readdirSync(src, { withFileTypes: true });
   for (const entry of entries) {
-    if (entry.name === 'template.json') continue;
-    
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
 
     if (entry.isDirectory()) {
-      await copyFiles(srcPath, destPath, variables, spinner);
+      await copyFiles(srcPath, destPath, spinner);
     } else {
       spinner.text = `Copying ${entry.name}...`;
-      const content = fs.readFileSync(srcPath, 'utf8');
-      try {
-        const processed = handlebars.compile(content)(variables);
-        fs.writeFileSync(destPath, processed);
-      } catch (error) {
-        fs.writeFileSync(destPath, content);
-      }
+      fs.copyFileSync(srcPath, destPath);
     }
   }
 }
 
-// Post-Installation
-function showPostInstall(config) {
-  if (!config?.postInstall) return;
-
-  console.log(chalk.cyan('\nPost-installation steps:'));
-  const steps = Array.isArray(config.postInstall) 
-    ? config.postInstall 
-    : [config.postInstall];
-  steps.forEach(step => console.log(chalk.white(step)));
-
-  if (config.scripts) {
-    console.log(chalk.cyan('\nAvailable scripts:'));
-    Object.entries(config.scripts).forEach(([name, cmd]) => 
-      console.log(chalk.white(`npm run ${name}${' '.repeat(12 - name.length)}- ${cmd}`))
-    );
+// Template Validation
+async function validateTemplate(templatePath) {
+  const requiredFiles = ['project-init.md'];
+  const files = await glob('*.md', { cwd: templatePath });
+  
+  const missingFiles = requiredFiles.filter(file => !files.includes(file));
+  if (missingFiles.length) {
+    throw new Error(`Template is missing required files: ${missingFiles.join(', ')}`);
   }
+  return true;
+}
+
+// Template Preview
+async function previewTemplate(templatePath) {
+  const files = await glob('*.md', { cwd: templatePath });
+  console.log(chalk.cyan('\nTemplate contents:'));
+  files.forEach(file => {
+    console.log(chalk.gray(`- ${file}`));
+  });
+  
+  const { proceed } = await inquirer.prompt([{
+    type: 'confirm',
+    name: 'proceed',
+    message: 'Do you want to proceed with this template?',
+    default: true
+  }]);
+  
+  return proceed;
 }
 
 // Main Execution
@@ -162,16 +99,40 @@ async function main() {
     const templateName = await selectTemplate(templates);
     const sourceDir = path.resolve(__dirname, './../instructions', templateName);
     const targetDir = path.resolve(process.cwd(), 'instructions');
-    const config = loadConfig(sourceDir);
     
-    showTemplateInfo(config);
-    const variables = await customizeTemplate(config);
+    // Validate template
+    await validateTemplate(sourceDir);
+    
+    // Preview and confirm
+    const proceed = await previewTemplate(sourceDir);
+    if (!proceed) {
+      console.log(chalk.yellow('Operation cancelled.'));
+      process.exit(0);
+    }
+    
+    // Check if target directory exists
+    if (fs.existsSync(targetDir)) {
+      const { overwrite } = await inquirer.prompt([{
+        type: 'confirm',
+        name: 'overwrite',
+        message: 'Target directory already exists. Do you want to overwrite?',
+        default: false
+      }]);
+      
+      if (!overwrite) {
+        console.log(chalk.yellow('Operation cancelled.'));
+        process.exit(0);
+      }
+    }
     
     const spinner = ora('Initializing template...').start();
     try {
-      await copyFiles(sourceDir, targetDir, variables, spinner);
+      await copyFiles(sourceDir, targetDir, spinner);
       spinner.succeed(chalk.green('Template copied successfully! 🎉'));
-      showPostInstall(config);
+      
+      console.log(chalk.cyan('\nNext steps:'));
+      console.log(chalk.gray('1. Check the instructions in the newly created directory'));
+      console.log(chalk.gray('2. Follow the steps in project-init.md to get started'));
     } catch (error) {
       spinner.fail(chalk.red('Failed to copy template.'));
       throw error;

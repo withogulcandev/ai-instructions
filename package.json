@@ -1,29 +1,46 @@
 {
   "name": "ai-instructions",
-  "version": "0.1.4",
-  "description": "AI development instruction library.",
+  "version": "0.1.5",
+  "description": "A powerful CLI tool for generating project templates and development instructions using AI-driven approach.",
   "main": "./src/index.js",
   "type": "module",
   "bin": {
     "ai-instructions": "./src/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/withogulcandev/ai-instructions.git"
   },
-  "author": "withogulcandev <hi@ogulcan.dev>",
+  "keywords": [
+    "ai",
+    "instructions",
+    "templates",
+    "project-generator",
+    "cli",
+    "development",
+    "automation",
+    "boilerplate"
+  ],
+  "author": {
+    "name": "Oğulcan Dev",
+    "email": "hi@ogulcan.dev",
+    "url": "https://ogulcan.dev"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/withogulcandev/ai-instructions/issues"
   },
   "homepage": "https://github.com/withogulcandev/ai-instructions#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "chalk": "^5.3.0",
     "glob": "^10.3.10",
-    "handlebars": "^4.7.8",
     "inquirer": "^9.2.12",
     "ora": "^8.0.1"
   }
