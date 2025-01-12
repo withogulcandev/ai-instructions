@@ -2,11 +2,6 @@
 
 Simple setup guide for the Empty Next.js project template.
 
-## Quick Start
-```bash
-npx ai-instructions init --template "empty-nextjs"
-```
-
 ## Prerequisites
 - Node.js 18.17 or later
 - Git
@@ -17,13 +12,13 @@ npx ai-instructions init --template "empty-nextjs"
 ### 1. Project Creation
 ```bash
 # Using create-next-app
-npx create-next-app@latest my-app --typescript --tailwind --app --src-dir --import-alias "@/*"
-
-# Navigate to project directory
-cd my-app
+npx create-next-app@latest . --typescript --tailwind --app --src-dir --import-alias "@/*"
 
 # Add Shadcn UI
-npx shadcn-ui@latest init
+npx shadcn@latest init
+
+# Add Shadcn UI Button
+npx shadcn@latest add button
 ```
 
 ### 2. Essential Configuration Files
