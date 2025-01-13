@@ -1,6 +1,36 @@
 # Empty React Native (Expo) Project Template
 
-A clean, modern React Native starter template using Expo, with essential configurations and best practices.
+A clean, modern React Native starter template using Expo, with essential configurations and best practices. This template is designed to be integrated into existing Expo projects or newly created ones via Expo CLI.
+
+## Getting Started
+
+### Using the Template
+
+1. If you don't have a project yet, create one using Expo CLI:
+   ```bash
+   npx create-expo-app@latest my-app
+   cd my-app
+   ```
+
+2. Install our template using:
+   ```bash
+   npx ai-instructions init --template "empty-reactnative-expo"
+   ```
+
+3. Read through the `/instructions` directory, starting with this README.md
+
+### AI Agent Integration
+
+When using this template with an AI Agent (like Claude in Cursor), start with the following prompt:
+
+```
+Target the /instructions directory and always follow these guidelines during development:
+1. Read and understand the template structure from template-structure.md
+2. Follow the coding standards from template-guidelines.md
+3. Apply template integration steps from template-integration.md
+4. Maintain consistency with the existing project structure
+5. Implement new features according to the template standards
+```
 
 ## Product Requirements Document (PRD)
 
@@ -93,7 +123,7 @@ This template provides a minimal yet production-ready React Native setup using E
 
 ## Implementation Guidelines
 Please refer to the following instruction documents:
-1. `project-setup.md` - Initial setup and configuration
-2. `project-structure.md` - Directory organization and conventions
-3. `development-guidelines.md` - Coding standards and best practices
+1. `template-integration.md` - Template integration and configuration
+2. `template-structure.md` - Directory organization and conventions
+3. `template-guidelines.md` - Coding standards and best practices
 4. `deployment.md` - Deployment and production considerations 

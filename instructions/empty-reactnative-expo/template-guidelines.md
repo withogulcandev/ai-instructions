@@ -1,6 +1,6 @@
-# Development Guidelines
+# Template Development Guidelines
 
-This document outlines the development standards and best practices for the Empty React Native (Expo) template.
+This document outlines the development guidelines and best practices for the Empty React Native (Expo) template.
 
 ## Code Style and Standards
 
@@ -318,3 +318,69 @@ const ErrorFallback: React.FC<{ error: Error; resetError: () => void }> = ({
    - Update README
    - Document API integration
    - Maintain change log 
+
+### Import Organization
+1. **Import Grouping**
+   - Group imports with comments
+   - Keep a blank line between groups
+   - Order from external to internal
+
+```typescript
+// React and React Native
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Platform } from 'react-native';
+
+// Navigation
+import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+// Third Party Libraries
+import { observer } from 'mobx-react-lite';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Components
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Header } from '@/components/shared/header';
+
+// Hooks
+import { useTheme } from '@/hooks/useTheme';
+import { useAppState } from '@/hooks/useAppState';
+
+// Store
+import { useStore } from '@/store';
+
+// Utils & Types
+import { formatDate } from '@/utils/format';
+import type { UserProfile } from '@/types';
+```
+
+2. **Import Order Priority**
+   - React and React Native imports first
+   - Navigation related imports
+   - Third party libraries
+   - Local components
+   - Local hooks
+   - Store/State management
+   - Utils and types last
+
+3. **Path Aliases**
+   - Use `@/` prefix for src directory imports
+   - Avoid relative paths (../../) when possible
+   - Group similar paths together
+
+4. **Import Style**
+   - Use named imports where possible
+   - Destructure commonly used imports
+   - Keep import statements clean and readable
+   - Sort imports alphabetically within groups
+
+```typescript
+// Good
+import { View, Text } from 'react-native';
+import { Button, Card, Input } from '@/components/ui';
+
+// Avoid
+import * as React from 'react';
+import '@/components/ui/button';
+``` 

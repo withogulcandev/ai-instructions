@@ -7,12 +7,6 @@ A powerful AI development instruction library that helps streamline the developm
 - AI-driven development instructions
 - Easy to use CLI interface
 
-## 🚀 Installation
-
-```bash
-npm install ai-instructions
-```
-
 ## 🛠️ Usage
 
 You can quickly initialize your project using the following command:
@@ -23,7 +17,7 @@ npx ai-instructions init --template <template-name>
 
 For example:
 ```bash
-npx ai-instructions init --template nextjs-saas
+npx ai-instructions init --template empty-reactnative-expo
 ```
 
 ## 🤝 Contributing
@@ -42,13 +36,9 @@ This project is [MIT](LICENSE) licensed.
 ## 👤 Author
 
 **Oğulcan Dev**
-- Website: [ogulcan.dev](https://ogulcan.dev)
 - GitHub: [@withogulcandev](https://github.com/withogulcandev)
+- Twitter: [@withogulcandev](https://twitter.com/withogulcandev)
 
 ## ⭐️ Show your support
 
 Give a ⭐️ if this project helped you!
-
----
-
-_This README was generated with ❤️_

@@ -1,39 +1,41 @@
-# Project Structure
+# Template Structure
 
-This document outlines the recommended project structure and organization for the Empty React Native (Expo) template.
+This document outlines the recommended structure and organization for the Empty React Native (Expo) template.
 
 ## Directory Structure
 
 ```
-src/
-├── app/                    # App entry points and navigation
+├── app/                   # App entry points and navigation
 │   ├── _layout.tsx        # Root layout (for Expo Router)
 │   ├── index.tsx          # Home screen
-│   └── [...]             # Other screens
+│   └── [...]              # Other screens
 ├── components/            # React Native components
-│   ├── ui/               # Reusable UI components
+│   ├── ui/                # Reusable UI components
 │   │   ├── button/
 │   │   ├── card/
 │   │   └── input/
-│   └── shared/           # Shared components
+│   └── shared/            # Shared components
 │       ├── header/
 │       └── screen-wrapper/
-├── hooks/                # Custom hooks
+├── screens/               # Screens
+│   ├── home.tsx/
+│   └── settings.tsx/
+├── hooks/                 # Custom hooks
 │   ├── useAppState.ts
 │   └── useTheme.ts
-├── services/            # API and external services
+├── services/              # API and external services
 │   ├── api/
 │   └── storage/
-├── store/              # State management
+├── store/                 # State management
 │   ├── slices/
 │   └── index.ts
-├── styles/             # Global styles and themes
+├── styles/                # Global styles and themes
 │   ├── theme.ts
 │   └── typography.ts
-├── utils/             # Utility functions
+├── utils/                 # Utility functions
 │   ├── format.ts
 │   └── validation.ts
-└── types/             # TypeScript type definitions
+└── types/                 # TypeScript type definitions
     └── index.ts
 ```
 

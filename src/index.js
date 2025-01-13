@@ -62,7 +62,7 @@ async function copyFiles(src, dest, spinner) {
 
 // Template Validation
 async function validateTemplate(templatePath) {
-  const requiredFiles = ['project-setup.md'];
+  const requiredFiles = ['template-integration.md'];
   const files = await glob('*.md', { cwd: templatePath });
   
   const missingFiles = requiredFiles.filter(file => !files.includes(file));
@@ -131,8 +131,8 @@ async function main() {
       spinner.succeed(chalk.green('Template copied successfully! 🎉'));
       
       console.log(chalk.cyan('\nNext steps:'));
-      console.log(chalk.gray('1. Check the instructions in the newly created directory'));
-      console.log(chalk.gray('2. Follow the steps in project-setup.md to get started'));
+      console.log(chalk.gray('1. Read through the README.md in the instructions directory'));
+      console.log(chalk.gray('2. When using AI assistance, start with: "Target the /instructions directory and always follow these guidelines during development"'));
     } catch (error) {
       spinner.fail(chalk.red('Failed to copy template.'));
       throw error;
