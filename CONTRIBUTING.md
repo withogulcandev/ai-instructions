@@ -8,56 +8,29 @@ We love your input! We want to make contributing to AI Instructions as easy and 
 ```bash
 instructions/
 └── your-template-name/
-    ├── project-init.md        # Required: Main instruction file
-    ├── deployment.md          # Optional: Deployment instructions
-    ├── configuration.md       # Optional: Configuration details
-    └── troubleshooting.md     # Optional: Common issues and solutions
+    ├── README.md              # Required: Template overview and requirements
+    ├── template-integration.md # Required: Integration instructions
+    ├── template-structure.md  # Required: Directory structure and organization
+    ├── template-guidelines.md # Required: Development guidelines and standards
+    └── deployment.md         # Optional: Deployment instructions
 ```
 
-2. Create a `project-init.md` file in your template directory. This file should contain:
-   - Clear step-by-step instructions
-   - Required dependencies and versions
-   - Project structure explanation
-   - Any specific configuration steps
+2. Required Files and Their Contents:
 
-3. Follow this format for your `project-init.md`:
-```markdown
-# Template Name: [Your Template Name]
+### `README.md`
+- Template overview
+- Getting started guide
+- AI Agent integration instructions
+- Product requirements (PRD)
+- Technical requirements
+- Success metrics
 
-## Description
-Brief description of what this template creates
-
-## Prerequisites
-- List required tools
-- List required knowledge
-
-## Steps
-1. First step
-2. Second step
-   - Sub-step details
-3. Third step
-
-## Configuration
-Any specific configuration instructions
-
-## Additional Notes
-Any extra information or tips
-```
-
-4. Test your template locally:
-```bash
-npx ai-instructions init --template your-template-name
-```
-
-5. Submit a Pull Request with your new template
-
-## Pull Request Process
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingTemplate`)
-3. Commit your changes (`git commit -m 'Add amazing template'`)
-4. Push to the branch (`git push origin feature/AmazingTemplate`)
-5. Open a Pull Request
+### `template-integration.md`
+- Prerequisites
+- Integration process
+- Common scenarios
+- Verification steps
+- Troubleshooting guide
 
 ## Questions?
 
