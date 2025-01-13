@@ -35,7 +35,6 @@ This project is [MIT](LICENSE) licensed.
 
 ## 👤 Author
 
-**Oğulcan Dev**
 - GitHub: [@withogulcandev](https://github.com/withogulcandev)
 - Twitter: [@withogulcandev](https://twitter.com/withogulcandev)
 
