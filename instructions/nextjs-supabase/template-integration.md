@@ -34,7 +34,7 @@ This document provides instructions for integrating the Next.js with Supabase te
    
    # UI and styling
    npm install tailwindcss postcss autoprefixer
-   npx shadcn-ui@latest init
+   npx shadcn@latest init
    
    # Development tools
    npm install -D typescript @types/react @types/node
